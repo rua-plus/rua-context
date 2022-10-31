@@ -1,5 +1,5 @@
 import produce, { Draft } from "immer";
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "use-sync-external-store/shim";
 
 export type RUAState = Record<string, unknown> | unknown[];
 export type SetState<S extends RUAState> = (
