@@ -2,6 +2,14 @@
 
 A global store for React.
 
+## Installation
+
+```bash
+npm i rua-context
+# or
+yarn add rua-context
+```
+
 ## Usage
 
 ```typescript
@@ -48,3 +56,7 @@ const TodoComponent = () => {
   );
 };
 ```
+
+## More
+
+[Build own store with useSyncExternalStore](https://www.rua.plus/p/build-own-store-with-usesyncexternalstore)
