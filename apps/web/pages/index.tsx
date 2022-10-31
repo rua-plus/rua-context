@@ -1,7 +1,7 @@
 import { Button } from "ui";
 import useTodoStore from "store/todo";
 import { useState } from "react";
-import { TodoViewer } from "components/TodoViewer";
+import TodoViewer from "components/TodoViewer";
 import TodoAdder from "components/TodoAdder";
 
 const TodoComponent = () => {

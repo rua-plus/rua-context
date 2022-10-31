@@ -4,7 +4,7 @@ type Props = {
   todo: string[];
 };
 
-export const TodoViewer = ({ todo }: Props) => {
+const TodoViewer = ({ todo }: Props) => {
   return (
     <>
       <ul>
@@ -15,3 +15,5 @@ export const TodoViewer = ({ todo }: Props) => {
     </>
   );
 };
+
+export default TodoViewer;
