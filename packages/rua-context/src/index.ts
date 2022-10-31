@@ -1,1 +1,3 @@
-export const name = "xfy";
+import createSlice from "./createSlice";
+
+export { createSlice };

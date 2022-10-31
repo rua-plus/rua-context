@@ -1,9 +1,8 @@
 {
   "name": "rua-context",
   "version": "0.0.1",
-  "main": "index.js",
-  "license": "MIT",
   "main": "./lib/cjs/index.js",
+  "license": "MIT",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
   "files": [
@@ -24,6 +23,7 @@
   },
   "author": "xfy <i@defect.ink>",
   "peerDependencies": {
+    "immer": "^9.0.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
