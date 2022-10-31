@@ -3,7 +3,7 @@ import { useSyncExternalStore } from "react";
 
 export type RUAState = Record<string, unknown> | unknown[];
 export type SetState<S extends RUAState> = (
-  stateOrFn: S | ((state: Draft<S>) => void)
+  stateOrFn: S | ((state: Draft<S>) => void | Draft<S>)
 ) => void;
 export type GetSnapshot<S extends RUAState> = () => S;
 export type Subscribe = (listener: () => void) => () => void;
@@ -24,9 +24,7 @@ const createStore = <S extends RUAState>(initialState: S) => {
   const getSnapshot = () => state;
   const setState: SetState<S> = (stateOrFn) => {
     if (typeof stateOrFn === "function") {
-      const newState = produce(state, (draft) => {
-        stateOrFn(draft);
-      });
+      const newState = produce(state, (draft) => stateOrFn(draft));
       state = newState;
     } else {
       state = stateOrFn;

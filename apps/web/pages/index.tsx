@@ -1,39 +1,47 @@
 import { Button } from "ui";
 import useTodoStore from "store/todo";
 import { useState } from "react";
+import { TodoViewer } from "components/TodoViewer";
+import TodoAdder from "components/TodoAdder";
+
+const TodoComponent = () => {
+  const [todo, setTodo] = useTodoStore();
+
+  const [tempTodo, setTempTodo] = useState("");
+  const handleSet = () => {
+    if (!tempTodo) return;
+    setTodo((d) => {
+      d.push(tempTodo);
+    });
+    setTempTodo("");
+  };
+
+  return (
+    <div>
+      <TodoViewer todo={todo} />
+
+      <div>
+        <TodoAdder
+          value={tempTodo}
+          onChange={(e) => setTempTodo(e.target.value)}
+          handleSet={handleSet}
+        />
+      </div>
+    </div>
+  );
+};
 
 export default function Web() {
-  const [todo, setTodo] = useTodoStore();
-  const [tempTodo, setTempTodo] = useState("");
-
   return (
     <div>
       <h1>Web</h1>
       <Button />
 
-      <div>
-        <ul>
-          {todo.map((item) => (
-            <li key={item.id}>{item.value}</li>
-          ))}
-        </ul>
-
-        <div>
-          <input
-            value={tempTodo}
-            onChange={(e) => setTempTodo(e.target.value)}
-          />
-          <button
-            onClick={() =>
-              setTodo((d) => {
-                d.push({ id: 1, value: tempTodo });
-              })
-            }
-          >
-            Add
-          </button>
-        </div>
-      </div>
+      <TodoComponent />
+      <hr />
+      <TodoComponent />
+      <hr />
+      <TodoComponent />
     </div>
   );
 }
