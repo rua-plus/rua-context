@@ -1,3 +1,3 @@
-import createSlice from "./createSlice";
+import createStore from "./store";
 
-export { createSlice };
+export { createStore };
