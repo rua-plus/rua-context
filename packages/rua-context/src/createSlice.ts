@@ -1,5 +1,10 @@
-import {} from "./index";
+import createAction from "./createAction";
+import { CaseReducer } from "./createReducer";
 import { RUAAction, RUAState } from "./store";
+
+const getType = (slice: string, actionKey: string) => {
+  return `${slice}/${actionKey}`;
+};
 
 export type CreateSliceProps<S extends RUAState> = {
   name: string;
@@ -7,16 +12,18 @@ export type CreateSliceProps<S extends RUAState> = {
   reducers: Record<string, (state: S, action?: RUAAction) => void | S>;
 };
 
-const createSlice = <S extends RUAState>({
-  name,
-  initialState,
-  reducers,
-}: CreateSliceProps<S>) => {
-  const caseReducers = reducers;
-  const _reducers = () => {};
-  const actions = Object.keys(reducers).reduce((prev, cur) => {
-    return { ...prev, [cur]: () => {} };
-  }, {});
+const createSlice = <S extends RUAState>(option: CreateSliceProps<S>) => {
+  const reducers = option.reducers ?? {};
+
+  const actionCreators: Record<string, Function> = {};
+  const sliceCaseReducersByName: Record<string, CaseReducer> = {};
+  const sliceCaseReducersByType: Record<string, CaseReducer> = {};
+
+  const actions = Object.keys(option.reducers).forEach((reducerName) => {
+    const type = getType(option.name, reducerName);
+    const caseReducers = reducers[reducerName];
+    actionCreators[reducerName] = createAction(type);
+  });
 
   return {
     name,
